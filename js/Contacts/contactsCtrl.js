@@ -259,18 +259,23 @@
     }
 
     function deleteContact(){
-      // delete from cache
-      contactsFactory.del( $scope.masterView.key );
 
-      // refresh data
-      setScope(contactsFactory.getCache());
+      if( confirm( "Are you sure you want to delete this contact?" ) ){
 
-      // reset masterview
-      $scope.masterView = {
-        show: false,
-        value: null,
-        key: null
-      };
+        // delete from cache
+        contactsFactory.del( $scope.masterView.key );
+
+        // refresh data
+        setScope(contactsFactory.getCache());
+
+        // reset masterview
+        $scope.masterView = {
+          show: false,
+          value: null,
+          key: null
+        };
+
+      }
 
       return;
     }
