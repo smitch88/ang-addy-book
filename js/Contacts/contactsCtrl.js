@@ -159,10 +159,12 @@
 
       page( $scope.contacts.data );
 
-      $scope.contacts.count = $scope.contacts.data.length;
+      var currentDataLength = $scope.contacts.data.length + 1;
 
-      if( $scope.contacts.data.length < $scope.contacts.range[1]){
-        $scope.contacts.range = [$scope.contacts.range[0], $scope.contacts.data.length];
+      $scope.contacts.count = currentDataLength;
+
+      if( currentDataLength < $scope.contacts.range[1]){
+        $scope.contacts.range = [$scope.contacts.range[0], currentDataLength];
       }
       return;
     }
