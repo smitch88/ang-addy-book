@@ -17,4 +17,14 @@ Run server with wanted port config and path to at root...something like...
 
 Navigate to localhost:8000 to load the grid. You should see something like the picture below
 
+##Base View
+
 ![Sample](https://raw.githubusercontent.com/smitch88/ang-addy-book/master/images/sample.png)
+
+##Master Detail View
+
+![Sample](https://raw.githubusercontent.com/smitch88/ang-addy-book/master/images/sameple2.png)
+
+##Filtering by State
+
+![Sample](https://raw.githubusercontent.com/smitch88/ang-addy-book/master/images/sample4.png)
