@@ -159,8 +159,6 @@
 
       page( $scope.contacts.data );
 
-      setViewingCounter( $scope.contacts.data.length );
-
       return;
     }
 
@@ -201,6 +199,8 @@
       if( $scope.table.at > partitionedSet.length ){
         setPage( partitionedSet.length - 1 );
       }
+
+      setViewingCounter( $scope.contacts.data.length );
 
       return;
     }
