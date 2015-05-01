@@ -30,7 +30,7 @@
     var BASE_DATA_PATH = function(){
       // hacky way to get github pages working as I want hah
       if( window.location.href.indexOf( "github" ) > -1 ) {
-        return "https://raw.githubusercontent.com/smitch88/ang-addy-book/master/public/data/"
+        return "http://smitch88.github.io/ang-addy-book/public/data/contacts.json"
       } else {
         return "/public/data/";
       }
