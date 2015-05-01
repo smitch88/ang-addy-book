@@ -440,6 +440,15 @@ table th[class*="col-"] {
   background-color: #940910;
 }
 
+.btn-default {
+  background-color: #dddddd;
+  color: #333;
+}
+
+.btn-default:hover {
+  background-color: #cccccc;
+}
+
 .btn-primary {
   background-color: #C68746;
   color: #ffffff;

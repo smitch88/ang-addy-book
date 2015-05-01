@@ -62,7 +62,8 @@
     // master view
     $scope.masterView = {
       show: false,
-      value: null
+      value: null,
+      key: null
     };
 
     $scope.showMasterDetail = showMasterView;
@@ -79,6 +80,7 @@
     $scope.prevStateSelected = null;
     $scope.prevData = null;
     $scope.refresh = getContactList;
+    $scope.deleteContact = deleteContact;
 
     // Set watcher on the filter bar
     $scope.$watch( "search", searchbarWatcher );
@@ -231,6 +233,7 @@
 
     function showMasterView( k ){
       $scope.masterView.show = true;
+      $scope.masterView.key = k;
       setMasterView( $scope.contacts.table[ k ] );
       return;
     }
@@ -246,6 +249,23 @@
 
     function establishCache( data ){
       contactsFactory.setCache( data );
+      return;
+    }
+
+    function deleteContact(){
+      // delete from cache
+      contactsFactory.del( $scope.masterView.key );
+
+      // refresh data
+      setScope(contactsFactory.getCache());
+
+      // reset masterview
+      $scope.masterView = {
+        show: false,
+        value: null,
+        key: null
+      };
+
       return;
     }
 

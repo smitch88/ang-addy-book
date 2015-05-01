@@ -92,8 +92,13 @@
       return;
     }
 
-    // TODO: Deleting records to cache
-    function del( opts ){
+    function del( k ){
+      contactsCache = contactsCache.filter(function(c){
+          return c.k !== k;
+      });
+    }
+
+    function parseQueryString(){
       return;
     }
 
