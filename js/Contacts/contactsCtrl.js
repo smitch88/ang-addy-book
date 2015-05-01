@@ -163,7 +163,7 @@
 
       $scope.contacts.count = currentDataLength;
 
-      $scope.contacts.range = currentDataLength < $scope.contacts.range[1] ?
+      $scope.contacts.range = ( currentDataLength < $scope.contacts.display ) ?
         [$scope.contacts.range[0], currentDataLength + 1] : [$scope.contacts.range[0], $scope.contacts.display];
 
       return;
