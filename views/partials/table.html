@@ -1,0 +1,104 @@
+<div class="table-view-container table-responsive">
+
+    <div class="table-actions">
+
+        <div class="search-container">
+            <input type="text" ng-model="search" ng-change="onSearch()" placeholder="Enter search text...">
+        </div>
+
+        <div class="filter-container">
+
+            <select ng-options="mapping as mapping.name for mapping in table.mapping"
+                    ng-model="sortSelected"
+                    ng-change="setOrderBy()">
+                <option value="">Select Sort</option>
+            </select>
+
+            <select ng-options="state as state.name for state in states"
+                    ng-model="stateSelected"
+                    ng-change="setStateFilter()">
+                <option value="">Filter by State</option>
+            </select>
+
+        </div>
+
+    </div>
+
+    <div class="table-content clearfix">
+
+        <!--- Make the headers and corresponding row generation dynamic based on json map --->
+        <table class="table table-bordered table-striped table-hover">
+
+            <thead>
+                <tr>
+                    <th ng-hide="true">k</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Tel</th>
+                    <th>Address</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Zip</th>
+                    <th>Email</th>
+                    <th>Date Added</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr ng-repeat="item in filtered = ( contacts.data | filter: filterByName )
+                               | orderBy: table.orderBy
+                               | startFrom: table.at * contacts.display
+                               | limitTo: contacts.display"
+                    ng-click="showMasterDetail( item.k )">
+
+                    <td ng-hide="true">{{ item.k }}</td>
+                    <td>{{ item.first_name }}</td>
+                    <td>{{ item.last_name }}</td>
+                    <td>{{ item.phone }}</td>
+                    <td class="text-left">{{ item.address }}</td>
+                    <td>{{ item.city }}</td>
+                    <td>{{ item.state }}</td>
+                    <td>{{ item.zip }}</td>
+                    <td class="text-left">{{ item.email }}</td>
+                    <td>{{ item.join_date }}</td>
+
+                </tr>
+                <tr ng-if="filtered.length === 0">
+                    <td colspan="9"><h2 style="color: #999;">No results found</h2></td>
+                </tr>
+            </tbody>
+
+        </table>
+
+        <div class="table-footer">
+
+            <div class="view-count">
+                <p>Viewing {{ contacts.range[0] }} - {{ contacts.range[1] }} of {{ contacts.count }} </p>
+            </div>
+
+            <div class="pagination">
+                <ol>
+                    <li ng-class="{ 'disabled' : table.at === 0 }" ng-click="prevPage()">Prev</li>
+                    <li ng-class="{ 'active' : table.at == $index }"
+                        ng-click="setPage( $index )"
+                        ng-repeat="item in table.pages">{{ $index + 1 }}
+                    </li>
+                    <li ng-class="{ 'disabled' : table.at === (table.pages.length - 1) }" ng-click="nextPage()">Next</li>
+                </ol>
+            </div>
+
+            <div class="display-count">
+
+                <select ng-init="displayCount = displays[0]"
+                        ng-options="display as display.name for display in displays"
+                        ng-model="displayCount"
+                        ng-change="setDisplayCount()">
+                </select>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
