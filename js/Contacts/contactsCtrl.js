@@ -159,7 +159,7 @@
 
       page( $scope.contacts.data );
 
-      var currentDataLength = $scope.contacts.data.length + 1;
+      var currentDataLength = $scope.contacts.data.length;
 
       $scope.contacts.count = currentDataLength;
 
