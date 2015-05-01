@@ -1,6 +1,10 @@
 # ang-addy-book
 Playing around with angular 
 
+# Live Demo
+
+http://smitch88.github.io/ang-addy-book/#/
+
 # Getting Started
 
 Get dependency on http-server
