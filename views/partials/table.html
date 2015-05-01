@@ -20,11 +20,63 @@
                 <option value="">Filter by State</option>
             </select>
 
+            <button class="btn btn-primary add-contact">+ Add Contact</button>
+
         </div>
 
     </div>
 
     <div class="table-content clearfix">
+
+        <form id="addContactForm" style="display: none">
+
+            <h2>New Contact</h2>
+
+            <div class="form-group">
+                <label>First Name</label>
+                <input type="text" name="first_name" value="First Name" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Last Name</label>
+                <input type="text" name="last_name" value="Last Name" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" name="phone" value="867" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Address 1</label>
+                <input type="text" name="address" value="1111 Very far from somewhere" required/>
+            </div>
+
+            <div class="form-group">
+                <label>City</label>
+                <input type="text" name="city" value="blah d blah" required/>
+            </div>
+
+            <div class="form-group">
+                <label>State</label>
+                <input type="text" name="state" value="MD" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Zip</label>
+                <input type="text" name="zip" value="21111" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Email</label>
+                <input type="text" name="email" value="something@underarmor.com" required/>
+            </div>
+
+            <hr>
+
+            <button class="btn btn-save">Save</button>
+
+        </form>
 
         <!-- Make the headers and corresponding row generation dynamic based on json map -->
         <table class="table table-bordered table-striped table-hover">

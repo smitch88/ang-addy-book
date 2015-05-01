@@ -82,8 +82,8 @@
 
     }
 
-    // TODO: Adding records to cache
     function post( opts ){
+      contactsCache.push( opts );
       return;
     }
 

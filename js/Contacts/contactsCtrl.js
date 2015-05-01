@@ -78,6 +78,7 @@
     $scope.mapToHeader = mapToHeader;
     $scope.prevStateSelected = null;
     $scope.prevData = null;
+    $scope.refresh = getContactList;
 
     // Set watcher on the filter bar
     $scope.$watch( "search", searchbarWatcher );
@@ -252,10 +253,10 @@
       var cacheSet = contactsFactory.hasCache();
       return cacheSet ?
         contactsFactory.get()
-      .success( setScope )
-      .error( contactsFactory.error ) :
-      setScope
-      .call( this, contactsFactory.getCache())
+          .success( setScope )
+          .error( contactsFactory.error ) :
+        setScope
+          .call( this, contactsFactory.getCache())
     }
 
   }
