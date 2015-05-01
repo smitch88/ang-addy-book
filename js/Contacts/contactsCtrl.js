@@ -159,12 +159,18 @@
 
       page( $scope.contacts.data );
 
-      var currentDataLength = $scope.contacts.data.length;
+      setViewingCounter( $scope.contacts.data.length );
 
-      $scope.contacts.count = currentDataLength;
+      return;
+    }
 
-      $scope.contacts.range = ( currentDataLength < $scope.contacts.display ) ?
-        [$scope.contacts.range[0], currentDataLength] : [$scope.contacts.range[0], $scope.contacts.display];
+    function setViewingCounter( length ){
+
+      $scope.contacts.count = length;
+
+      $scope.contacts.range = ( length < $scope.contacts.display ) ?
+        [$scope.contacts.range[0], length] : [$scope.contacts.range[0], $scope.contacts.display];
+
 
       return;
     }
