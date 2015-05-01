@@ -164,7 +164,7 @@
       $scope.contacts.count = currentDataLength;
 
       if( currentDataLength < $scope.contacts.range[1]){
-        $scope.contacts.range = [$scope.contacts.range[0], currentDataLength];
+        $scope.contacts.range = [$scope.contacts.range[0], currentDataLength - 1];
       }
       return;
     }
