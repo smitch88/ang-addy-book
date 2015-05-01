@@ -24,8 +24,17 @@
 
     var indexedCache = null;
 
+
+
     // base data path
-    var BASE_DATA_PATH = "/public/data/";
+    var BASE_DATA_PATH = function(){
+      // hacky way to get github pages working as I want hah
+      if( window.location.href.indexOf( "github" ) > -1 ) {
+        return "https://raw.githubusercontent.com/smitch88/ang-addy-book/master/public/data/"
+      } else {
+        return "/public/data/";
+      }
+    }();
 
     // Exposed api functionality
     var contactsAPI = {
