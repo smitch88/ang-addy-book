@@ -15,9 +15,9 @@
     .controller( 'ContactsCtrl', contactsController );
 
   // Explicit DI defn
-  contactsController.$inject = [ '$scope', 'ContactsFactory', 'UtilityFactory' ];
+  contactsController.$inject = [ '$scope', '$timeout', 'ContactsFactory', 'UtilityFactory' ];
 
-  function contactsController( $scope, contactsFactory, utils ){
+  function contactsController( $scope, $timeout, contactsFactory, utils ){
 
     // display options
     $scope.displays = [{value: 10, name: '10'},
@@ -102,9 +102,9 @@
 
       // Generate kv map of distinct sorted state values
       $scope.states = utils.kvMap(
-                        utils.distinct(
-                            utils.values( "state", data )
-                              .sort()));
+        utils.distinct(
+          utils.values( "state", data )
+          .sort()));
 
       page( indexedArray );
       setPage( 0 );
@@ -124,7 +124,7 @@
 
     function mapToHeader( header ){
       return $scope.table.mapping.filter(function( item ){
-          return item.value === header;
+        return item.value === header;
       });
     }
 
@@ -133,6 +133,7 @@
     */
     function setDisplayCount(){
       $scope.contacts.display = $scope.displayCount.value;
+      page( $scope.contacts.data );
       return;
     }
 
@@ -140,24 +141,30 @@
     * Sorting and filtering
     */
     function searchbarWatcher(){
-      console.log( $scope.filtered );
+      $timeout( function(){
+        page( $scope.filtered );
+      }, 300);
+      return;
     }
 
     function setStateFilter(){
 
-        var cachedContent = contactsFactory.getCache();
+      var cachedContent = contactsFactory.getCache();
 
-        if( $scope.stateSelected && $scope.stateSelected.value !== "" ){
+      if( $scope.stateSelected && $scope.stateSelected.value !== "" ){
+        $scope.contacts.data = utils.only( "state", $scope.stateSelected.value, cachedContent);
+      } else {
+        $scope.contacts.data = cachedContent;
+      }
 
-          $scope.contacts.data = utils.only( "state", $scope.stateSelected.value, cachedContent);
+      page( $scope.contacts.data );
 
-        } else {
+      $scope.contacts.count = $scope.contacts.data.length;
 
-          $scope.contacts.data = cachedContent;
-
-        }
-
-        return;
+      if( $scope.contacts.data.length < $scope.contacts.range[1]){
+        $scope.contacts.range = [$scope.contacts.range[0], $scope.contacts.data.length];
+      }
+      return;
     }
 
     function filterByName( item ){
@@ -182,6 +189,11 @@
     function page( d ){
       var partitionedSet = utils.partition( d, $scope.contacts.display );
       $scope.table.pages = partitionedSet;
+
+      if( $scope.table.at > partitionedSet.length ){
+        setPage( partitionedSet.length - 1 );
+      }
+
       return;
     }
 
@@ -238,10 +250,10 @@
       var cacheSet = contactsFactory.hasCache();
       return cacheSet ?
         contactsFactory.get()
-          .success( setScope )
-          .error( contactsFactory.error ) :
-        setScope
-          .call( this, contactsFactory.getCache())
+      .success( setScope )
+      .error( contactsFactory.error ) :
+      setScope
+      .call( this, contactsFactory.getCache())
     }
 
   }

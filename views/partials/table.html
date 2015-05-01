@@ -3,7 +3,7 @@
     <div class="table-actions">
 
         <div class="search-container">
-            <input type="text" ng-model="search" ng-change="onSearch()" placeholder="Enter search text...">
+            <input type="text" ng-init="" ng-model="search" ng-change="onSearch()" placeholder="Enter search text...">
         </div>
 
         <div class="filter-container">
@@ -83,7 +83,7 @@
                         ng-click="setPage( $index )"
                         ng-repeat="item in table.pages">{{ $index + 1 }}
                     </li>
-                    <li ng-class="{ 'disabled' : table.at === (table.pages.length - 1) }" ng-click="nextPage()">Next</li>
+                    <li ng-class="{ 'disabled' : table.pages.length === 0 || table.at === (table.pages.length - 1) }" ng-click="nextPage()">Next</li>
                 </ol>
             </div>
 
